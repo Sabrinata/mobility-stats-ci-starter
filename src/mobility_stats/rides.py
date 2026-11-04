@@ -6,7 +6,7 @@ from collections import defaultdict
 def load_rides(csv_path: str) -> list[dict[str, object]]:
     """Load ride data from a CSV file."""
     rides = []
-    if os.path.exists(csv_path) == False:
+    if not os.path.exists(csv_path):
         raise FileNotFoundError(f"Could not find file: {csv_path}")
     with open(csv_path, newline="", encoding="utf-8") as f:
         r = csv.DictReader(f)
@@ -43,7 +43,7 @@ def count_by_rider_type(rides):
 
 def busiest_start_station(rides):
     """Return the start station with the most rides."""
-    if rides == None:
+    if rides is None:
         raise ValueError("rides must not be None")
     if len(rides) == 0:
         raise ValueError("rides must not be empty")
